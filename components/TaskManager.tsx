@@ -74,6 +74,29 @@ export default function TaskManager() {
       setEditId(null);
     }
   };
+
+  const total = tasks.length;
+  const completed = tasks.filter(task => task.status === 'completed').length;
+  const inProgress = tasks.filter(task => task.status === 'in progress').length;
+  const notStarted = tasks.filter(task => task.status === 'not started').length;
+
+const completedPercentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const inProgressPercentage = total > 0 ? Math.round((inProgress / total) * 100) : 0;
+  const notStartedPercentage = total > 0 ? Math.round((notStarted / total) * 100) : 0;
+
+  const getProductivity = () => {
+    const totalTasks = tasks.length;
+    if (totalTasks === 0) return 0;
+   if (completedPercentage >=70) return 'high';
+    if (completedPercentage >= 40) return 'medium';
+    return 'low';
+  }
+  const markedDeadlines= tasks.reduce((acc, task) => {
+    if (task.dueDate) {
+      acc[task.dueDate] = { marked: true, dotColor: 'red',activeOpacity: 0.5, };
+    }
+    return acc;
+  }, {} as Record<string, { marked: boolean; dotColor: string; activeOpacity: number }>);
   return (
     <View>
       
