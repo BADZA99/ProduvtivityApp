@@ -98,8 +98,150 @@ const completedPercentage = total > 0 ? Math.round((completed / total) * 100) : 
     return acc;
   }, {} as Record<string, { marked: boolean; dotColor: string; activeOpacity: number }>);
   return (
-    <View>
-      
-    </View>
-  )
+    <>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
+        {total > 0 && (
+          <TouchableOpacity
+            style={styles.processToggle}
+            onPress={() => setShowAnalytics(!showAnalytics)}
+          >
+            <Text style={styles.processToggleText}>
+              {showAnalytics ? "Hide Analytics" : "Show Analytics"}
+            </Text>
+          </TouchableOpacity>
+        )}
+        <Text style={styles.header}>Task Manager</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Task Title"
+          value={title}
+          onChangeText={setTitle}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Task Description"
+          value={description}
+          onChangeText={setDescription}
+        />
+        <View style={styles.statusContainer}>
+          <View style={styles.statusButtons}>
+            {["not started", "in progress", "completed"].map((statusOption) => (
+              <TouchableOpacity
+                key={statusOption}
+                style={[
+                  styles.statusButton,
+                  status === statusOption && styles.activeStatusButton,
+                ]}
+                onPress={() => setStatus(statusOption as TaskStatus)}
+              >
+                <Text style={styles.statusButtonText}>{statusOption}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.dueDateContainer}>
+          <Text
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            Due Date {dueDate ? dueDate : "none"}
+          </Text>
+
+          <TouchableOpacity
+            style={styles.dueDateButton}
+            onPress={() => setSelectCalendarVisible(true)}
+          >
+            <Text style={styles.calendarButtonText}>Select due Date</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.saveButton} onPress={handleSaveTask}>
+          <Text style={styles.saveButtonText}>
+            {editId ? "Update Task" : "add Task"}
+          </Text>
+        </TouchableOpacity>
+
+        <FlatList
+          data={tasks}
+          keyExtractor={(item) => item.id}
+          numColumns={3}
+          contentContainerStyle={styles.taskList}
+          renderItem={({ item }) => (
+            <View style={styles.taskCard}>
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={styles.cardDescription}>{item.description}</Text>
+              <Text style={styles.cardStatus}>Status: {item.status}</Text>
+              {item.dueDate && (
+                <Text style={styles.cardDueDate}>
+                  Due {item.dueDate ? item.dueDate : "no deadline"}
+                </Text>
+              )}
+              <View style={styles.cardButtons}>
+                <TouchableOpacity
+                  style={styles.editButton}
+                  onPress={() => handleEditTask(item)}
+                >
+                  <Text style={styles.editButtonText}>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => handleDeleteTask(item.id)}
+                >
+                  <Text style={styles.deleteButtonText}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        />
+
+        {showAnalytics && total > 0 && (
+          <View style={styles.analyticsContainer}>
+            <Text style={styles.analyticsTitle}>Analytics</Text>
+            <Text style={styles.analyticsText}>Total Tasks: {total}</Text>
+            <Text style={styles.analyticsText}>
+              Completed: {completed} ({completedPercentage}%)
+            </Text>
+            <Text style={styles.analyticsText}>
+              In Progress: {inProgress} ({inProgressPercentage}%)
+            </Text>
+            <Text style={styles.analyticsText}>
+              Not Started: {notStarted} ({notStartedPercentage}%)
+            </Text>
+            <Text
+              style={[
+                styles.productivity,
+                {
+                  color:
+                    getProductivity() === "high"
+                      ? "green"
+                      : getProductivity() === "medium"
+                      ? "orange"
+                      : "red",
+                  fontWeight: "bold",
+                },
+              ]}
+            >
+              Productivity Level: {getProductivity()}
+            </Text>
+          </View>
+        )}
+        <TouchableOpacity
+          style={styles.viewCalendarButton}
+          onPress={() => setViewCalendarVisible(true)}
+        >
+          <Text style={styles.viewCalendarButtonText}>View Calendar</Text>
+        </TouchableOpacity>
+        
+      </KeyboardAvoidingView>
+    </>
+  );
 }
+
+
+
+
