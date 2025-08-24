@@ -1,50 +1,72 @@
-# Welcome to your Expo app 👋
+# Task Manager App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Description
 
-## Get started
+Bienvenue dans l'application Task Manager ! Cette application React Native vous permet de gérer vos tâches efficacement en suivant leur statut, leur date limite, et en visualisant des analyses de productivité.
 
-1. Install dependencies
+---
 
+## Fonctionnalités
+
+- Ajouter, modifier et supprimer des tâches.
+- Suivre le statut des tâches : **not started**, **in progress**, **completed**.
+- Sélectionner une date limite pour chaque tâche.
+- Afficher des analyses de productivité basées sur les tâches.
+- Interface utilisateur intuitive et réactive.
+
+---
+
+## Captures d'Écran
+
+### Vue Principale
+
+![Vue Principale](./screenshots/IMG_9744.PNG)
+
+### Vue avec Analyses
+
+![Vue avec Analyses](./screenshots/IMG_9745.PNG)
+
+### edition d'une Tâche
+
+![Modification d'une Tâche](./screenshots/IMG_9746.PNG)
+
+---
+
+## Installation
+
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/BADZA99/ProductivityApp.git
+   ```
+
+2. Installez les dépendances :
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. Lancez l'application :
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Technologies Utilisées
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **React Native** : Framework pour le développement mobile.
+- **Expo** : Plateforme pour simplifier le développement React Native.
+- **React Navigation** : Gestion de la navigation.
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Auteur
 
-```bash
-npm run reset-project
-```
+Développé par **BADZA99**.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+## Ressources
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Documentation React Native](https://reactnative.dev/docs/getting-started)
+- [Documentation Expo](https://docs.expo.dev/)
+- [React Navigation](https://reactnavigation.org/)
